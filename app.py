@@ -3,18 +3,20 @@ import africastalking
 import os
 
 app = Flask(__name__)
-username = ""
-api_key = ""
+username = "sandbox"
+api_key = "dc870d76c3dfbaae862dac7eb6a38342044b19b38be1bed1fc04be3dee5b03a2"
 africastalking.initialize(username, api_key)
 sms = africastalking.SMS
+
+print(sms)
 
 @app.route('/', methods=['POST', 'GET'])
 def ussd_callback():
     global response
-    session_id = request.values.get("sessionId", None)
-    service_code = request.values.get("serviceCode", None)
-    phone_number = request.values.get("phoneNumber", None)
-    text = request.values.get("text", "default")
+    session_id = "" #request.values.get("sessionId", None)
+    service_code = "*384*16122#"  #request.values.get("serviceCode", None)
+    phone_number = "0664686815" #request.values.get("phoneNumber", None)
+    text = "" #request.values.get("text", "default")
     sms_phone_number = []
     sms_phone_number.append(phone_number)
 
@@ -54,4 +56,4 @@ def ussd_callback():
     return response
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=os.environ.get("PORT"))
+    app.run()
